@@ -10,10 +10,17 @@ orbs:
 jobs:
   build:
     executor: android/android
-
     steps:
       - checkout
       - run:
           command: chmod +x gradlew
       - run:
+          name: Run Tests
+          command: ./gradlew lint test
+      - run:
           command: ./gradlew build
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
