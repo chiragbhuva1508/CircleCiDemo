@@ -1,9 +1,5 @@
 version: 2.1
 
-general:
-  artifacts:
-    - /app/build/outputs/apk/
-
 orbs:
   android: circleci/android@0.2.0
 
@@ -20,7 +16,7 @@ jobs:
       - run:
           command: ./gradlew build
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/reports
+          path: app/build/outputs/apk
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/test-results
